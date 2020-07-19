@@ -1,33 +1,17 @@
 from facebook_scraper import get_posts
 from json import dumps
+from os import chdir, path
 
+page_id = input('# Input Facebook Page ID, Or press Enter for "mwrifb" :')
+if not len(page_id): page_id = 'mwrifb'
 
-# i = 1
+num_pages = input('# Input Number of Pages to get, Or press Enter for 1  :')
+if not len(num_pages): num_pages = 1
 
-# for post in get_posts('mwrifb', pages=10):
-#     print('post ', i, post['text'][:50])
+print('\n# Getting',num_pages,'page(s) from http://www.facebook.com/'+page_id+'\n')
 
-#     with open('C:/Users/H/Desktop/myFBDump.txt', 'ab') as myfile:
+chdir(path.dirname(path.abspath(__file__)))
 
-#         dic2str = dumps(post, indent=4, sort_keys=True, default=str)
-
-#         dic2str = dic2str.encode('utf8')
-
-#         myfile.write(dic2str)
-
-#     i += 1
-
-
-with open('C:/Users/H/Desktop/myFBDumpF.txt', 'ab') as myfile:
-
-    i = 1
-
-    for post in get_posts('mwrifb', pages=10):
-
-        print('post ', i, post['text'][:50])
-
-        dic2str = repr(post)
-        dic2str = dic2str.encode('utf8')
-        myfile.write(dic2str)
-
-        i += 1
+for post in get_posts(page_id, pages=num_pages):
+    with open('FBDataDump.txt', 'a', encoding='utf8') as myfile:
+        myfile.write(repr(post))
