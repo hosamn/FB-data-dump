@@ -1,6 +1,16 @@
-from facebook_scraper import get_posts
-from json import dumps
 from os import chdir, path
+import subprocess
+import sys
+
+def install(package):
+    subprocess.check_call([sys.executable, "-m", "pip", "install", package])
+    
+try :
+    from facebook_scraper import get_posts
+except:
+    install(facebook_scraper)
+    from facebook_scraper import get_posts
+
 
 page_id = input('# Input Facebook Page ID, Or press Enter for "mwrifb" :')
 if not len(page_id): page_id = 'mwrifb'
