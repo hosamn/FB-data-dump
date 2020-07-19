@@ -18,7 +18,7 @@ from json import dumps
 #     i += 1
 
 
-with open('C:/Users/H/Desktop/myFBDump.txt', 'ab') as myfile:
+with open('C:/Users/H/Desktop/myFBDumpF.txt', 'ab') as myfile:
 
     i = 1
 
@@ -26,7 +26,7 @@ with open('C:/Users/H/Desktop/myFBDump.txt', 'ab') as myfile:
 
         print('post ', i, post['text'][:50])
 
-        dic2str = dumps(post, indent=4, sort_keys=True, default=str)
+        dic2str = repr(post)
         dic2str = dic2str.encode('utf8')
         myfile.write(dic2str)
 
